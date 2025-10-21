@@ -71,6 +71,7 @@ export default tseslint.config(
       'simple-import-sort/exports': 'error',
       '@typescript-eslint/no-unused-expressions': 'off',
       '@typescript-eslint/no-unsafe-function-type': 'off',
+      'react/react-in-jsx-scope': 'off',
     },
   },
   {
