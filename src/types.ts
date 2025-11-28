@@ -43,7 +43,7 @@ interface UseFiltersReturn<TFiltersDef> {
     key: FilterKey<TFiltersDef> | FilterKey<TFiltersDef>[],
     options?: UseFiltersSettings,
   ) => void;
-  onSubmit: () => void;
+  handleSubmit: () => void;
   reset: () => void;
 }
 

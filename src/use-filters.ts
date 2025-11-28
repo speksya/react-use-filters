@@ -108,7 +108,7 @@ const useFilters = <TFiltersDef extends FiltersDef<TFiltersDef>>(
     setState(resetState);
   }, [state]);
 
-  const onSubmit = React.useCallback(() => {
+  const handleSubmit = React.useCallback(() => {
     submitFn({ query: submitFiltersFn(state), state });
     initialStateReference.current = state;
   }, [submitFn, state]);
@@ -132,7 +132,7 @@ const useFilters = <TFiltersDef extends FiltersDef<TFiltersDef>>(
     setFilter,
     removeFilter,
     reset,
-    onSubmit,
+    handleSubmit,
   };
 };
 

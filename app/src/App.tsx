@@ -12,7 +12,7 @@ function App() {
   const {
     setFilter,
     state: { count, isReady },
-    onSubmit,
+    handleSubmit,
   } = useFilters<Filters>({
     defaultValues: filters,
     submitFn: ({ state }) => setFilters(state),
@@ -32,7 +32,7 @@ function App() {
           );
         })}
       </div>
-      <button disabled={!isReady} onClick={onSubmit}>
+      <button disabled={!isReady} onClick={handleSubmit}>
         Submit | Count: {count}
       </button>
     </div>
