@@ -2,18 +2,6 @@ type Filter = string | string[];
 
 type FilterKey<TFiltersDef> = keyof TFiltersDef;
 
-type FilterKeyString<TFiltersDef> = {
-  [KFiltersDef in keyof TFiltersDef]: TFiltersDef[KFiltersDef] extends string
-    ? KFiltersDef
-    : never;
-}[keyof TFiltersDef];
-
-type FilterKeyArray<TFiltersDef> = {
-  [KFiltersDef in keyof TFiltersDef]: TFiltersDef[KFiltersDef] extends string[]
-    ? KFiltersDef
-    : never;
-}[keyof TFiltersDef];
-
 type Filters<TFiltersDef> = {
   [KFiltersDef in keyof TFiltersDef]: TFiltersDef[KFiltersDef] extends Filter
     ? TFiltersDef[KFiltersDef]
@@ -52,11 +40,7 @@ interface UseFiltersReturn<TFiltersDef> {
     options?: UseFiltersSettings,
   ) => void;
   removeFilter: (
-    key: FilterKeyString<TFiltersDef>,
-    options?: UseFiltersSettings,
-  ) => void;
-  removeFilters: (
-    keys: FilterKeyArray<TFiltersDef>[],
+    key: FilterKey<TFiltersDef> | FilterKey<TFiltersDef>[],
     options?: UseFiltersSettings,
   ) => void;
   onSubmit: () => void;
@@ -66,8 +50,6 @@ interface UseFiltersReturn<TFiltersDef> {
 export type {
   Filter,
   FilterKey,
-  FilterKeyArray,
-  FilterKeyString,
   Filters,
   FiltersDef,
   UseFiltersOptions,

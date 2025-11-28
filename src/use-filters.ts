@@ -4,15 +4,12 @@ import {
   countFn,
   isReadyFn,
   removeFilterFn,
-  removeFiltersFn,
   resetFn,
   setFilterFn,
   submitFiltersFn,
 } from './logic';
 import type {
   FilterKey,
-  FilterKeyArray,
-  FilterKeyString,
   Filters,
   FiltersDef,
   UseFiltersOptions,
@@ -92,22 +89,14 @@ const useFilters = <TFiltersDef extends FiltersDef<TFiltersDef>>(
   );
 
   const removeFilter = React.useCallback(
-    (key: FilterKeyString<TFiltersDef>, options?: UseFiltersSettings): void => {
-      const updatedFilter = removeFilterFn(key);
+    (
+      key: FilterKey<TFiltersDef> | FilterKey<TFiltersDef>[],
+      options?: UseFiltersSettings,
+    ): void => {
+      const updatedFilter = removeFilterFn(key, state);
       const updatedState = { ...state, ...updatedFilter };
 
       setState(updatedFilter);
-      checkOptions(updatedState, options);
-    },
-    [state, checkOptions],
-  );
-
-  const removeFilters = React.useCallback(
-    (keys: FilterKeyArray<TFiltersDef>[], options?: UseFiltersSettings) => {
-      const updatedFilters = removeFiltersFn(keys);
-      const updatedState = { ...state, ...updatedFilters };
-
-      setState(updatedState);
       checkOptions(updatedState, options);
     },
     [state, checkOptions],
@@ -142,7 +131,6 @@ const useFilters = <TFiltersDef extends FiltersDef<TFiltersDef>>(
     },
     setFilter,
     removeFilter,
-    removeFilters,
     reset,
     onSubmit,
   };
